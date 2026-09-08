@@ -1,0 +1,79 @@
+// Pulls the latest release from GitHub and updates the download links, version,
+// date, size and checksum link. The static hrefs already point at
+// /releases/latest/download/<asset>, so the page works even if this script fails.
+(function () {
+  var REPO = 'ddatunashvili/light_browser';
+  var API = 'https://api.github.com/repos/' + REPO + '/releases/latest';
+  var CACHE_KEY = 'lb-latest-release';
+  var CACHE_TTL = 15 * 60 * 1000; // 15 min: stays well under GitHub's unauthenticated rate limit
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function fmtSize(bytes) {
+    if (!bytes) return '';
+    var mb = bytes / (1024 * 1024);
+    return mb >= 1 ? mb.toFixed(1) + ' MB' : Math.round(bytes / 1024) + ' KB';
+  }
+  function fmtDate(iso) {
+    try { return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }); }
+    catch (e) { return ''; }
+  }
+
+  function apply(rel) {
+    if (!rel || !rel.tag_name) return;
+    var assets = rel.assets || [];
+    var byName = {};
+    assets.forEach(function (a) { byName[a.name] = a; });
+
+    var setup = byName['LightBrowser-Setup.exe'];
+    var portable = byName['LightBrowser.exe'];
+    var sum = byName['LightBrowser-Setup.exe.sha256'];
+
+    var ver = rel.tag_name.replace(/^v/, '');
+    var v = $('version');
+    v.textContent = 'v' + ver;
+    v.className = 'badge live';
+    v.title = rel.name || '';
+
+    var parts = ['Windows 10/11 · 64-bit'];
+    if (setup && setup.size) parts.push(fmtSize(setup.size));
+    if (rel.published_at) parts.push('released ' + fmtDate(rel.published_at));
+    $('details').textContent = parts.join(' · ');
+
+    if (setup && setup.browser_download_url) {
+      $('download').href = setup.browser_download_url;
+      $('download').setAttribute('download', 'LightBrowser-Setup.exe');
+    }
+    if (portable && portable.browser_download_url) $('portable').href = portable.browser_download_url;
+    if (sum && sum.browser_download_url) {
+      $('checksum').href = sum.browser_download_url;
+      $('checksum-wrap').hidden = false;
+    }
+    if (rel.html_url) {
+      var rn = $('release-notes-link');
+      rn.querySelector('a').href = rel.html_url;
+      rn.hidden = false;
+    }
+  }
+
+  function load() {
+    try {
+      var cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && Date.now() - cached.t < CACHE_TTL) { apply(cached.rel); return; }
+    } catch (e) {}
+
+    fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (rel) {
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), rel: rel })); } catch (e) {}
+        apply(rel);
+      })
+      .catch(function () {
+        // Leave the static "latest" links in place; they still resolve on GitHub.
+        $('version').textContent = 'latest release';
+      });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load);
+  else load();
+})();
