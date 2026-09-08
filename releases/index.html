@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Light Browser releases and updates — version history, changelog, downloads</title>
+  <meta name="description" content="Every Light Browser release: version history, what changed, installer and portable downloads with SHA-256 checksums. The browser updates itself automatically; download any version here.">
+  <meta name="keywords" content="light browser releases, light browser changelog, light browser update, light browser download, light browser version history">
+  <meta name="author" content="404 Friends">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href="https://lightbrowser.net/releases/">
+  <link rel="alternate" hreflang="en" href="https://lightbrowser.net/releases/">
+  <link rel="alternate" hreflang="ka" href="https://lightbrowser.net/ka/releases/">
+  <link rel="alternate" hreflang="x-default" href="https://lightbrowser.net/releases/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lightbrowser.net/releases/">
+  <meta property="og:site_name" content="Light Browser">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ka_GE">
+  <meta property="og:title" content="Light Browser releases and updates">
+  <meta property="og:description" content="Version history, changelog and downloads for every Light Browser release.">
+  <meta property="og:image" content="https://lightbrowser.net/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Light Browser logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Light Browser releases and updates">
+  <meta name="twitter:description" content="Version history, changelog and downloads for every Light Browser release.">
+  <meta name="twitter:image" content="https://lightbrowser.net/og-image.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="stylesheet" href="/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://lightbrowser.net/releases/",
+    "url": "https://lightbrowser.net/releases/",
+    "name": "Light Browser releases and updates",
+    "inLanguage": "en",
+    "isPartOf": { "@id": "https://lightbrowser.net/#site" },
+    "about": { "@id": "https://lightbrowser.net/#app" },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Light Browser", "item": "https://lightbrowser.net/" },
+        { "@type": "ListItem", "position": 2, "name": "Releases", "item": "https://lightbrowser.net/releases/" }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/"><img src="/logo.svg" alt="" width="28" height="28"> Light Browser</a>
+    <nav>
+      <a href="/#features">Features</a>
+      <a href="/#security">Security</a>
+      <a href="/releases/" aria-current="page">Releases</a>
+      <a class="lang" href="/ka/releases/" lang="ka" hreflang="ka" title="ქართული">ქარ</a>
+      <button id="theme-toggle" class="theme-btn" type="button" title="Switch theme" aria-label="Switch theme">
+        <svg class="ico-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        <svg class="ico-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="page-head">
+      <h1>Releases and updates</h1>
+      <p class="lead">Light Browser checks for updates on startup and installs them silently after a SHA-256 check.
+        This page lists every version with its notes and downloads.</p>
+      <div class="cta">
+        <a id="download" class="btn primary" href="https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser-Setup.exe">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>
+          Download latest
+        </a>
+        <a id="portable" class="btn ghost" href="https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser.exe">Portable .exe</a>
+      </div>
+      <p class="meta"><span id="version" class="badge">latest</span> <span id="details">Windows 10/11 · 64-bit</span></p>
+    </section>
+
+    <section class="howto">
+      <h2>How updating works</h2>
+      <ul>
+        <li><b>Automatic.</b> On startup (at most every 6 hours) the browser reads the latest release from GitHub. If it's newer, the installer downloads, its checksum is verified, and it installs and relaunches.</li>
+        <li><b>Manual.</b> Open the <code>⋮</code> menu → <b>About</b> → <b>Check for updates</b>, or download any version below and run it over the existing install.</li>
+        <li><b>Ad filters</b> update separately, once a day, without a new browser version. <code>⋮</code> → <b>Update ad filters now</b> forces a refresh.</li>
+        <li><b>Portable</b> builds do not self-update; download the new <code>LightBrowser.exe</code> and replace the old one.</li>
+      </ul>
+    </section>
+
+    <section id="releases" class="releases" aria-live="polite">
+      <p class="muted">Loading releases from GitHub…</p>
+      <noscript><p>JavaScript is off. See the releases on <a href="https://github.com/ddatunashvili/light_browser/releases">GitHub</a>.</p></noscript>
+    </section>
+  </main>
+
+  <footer>
+    <a class="madeby" href="https://404friends.ge" target="_blank" rel="noopener">
+      <img src="/404friends.png" alt="404 Friends" width="34" height="34">
+      <span>Made by <b>404 Friends</b><small>404friends.ge</small></span>
+    </a>
+    <p>Light Browser · MIT License · <a href="https://github.com/ddatunashvili/light_browser" target="_blank" rel="noopener">GitHub</a> · <a href="/">Home</a> · <a href="/ka/releases/" lang="ka">ქართული</a></p>
+  </footer>
+
+  <script src="/app.js"></script>
+  <script src="/releases.js"></script>
+</body>
+</html>

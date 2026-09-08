@@ -158,3 +158,39 @@ footer p { margin: 4px 0; }
 .madeby img { border-radius: 9px; display: block; }
 .madeby span { display: flex; flex-direction: column; line-height: 1.25; font-size: .95rem; }
 .madeby small { color: var(--muted); font-size: .82rem; }
+
+/* language switch */
+.top nav .lang { font-weight: 700; font-size: .85rem; letter-spacing: .02em; padding: 4px 8px; border: 1px solid var(--bd); border-radius: 8px; background: var(--card); }
+.top nav .lang:hover { border-color: var(--accent); color: var(--accent); }
+.top nav a[aria-current="page"] { color: var(--fg); }
+.meta a { font-weight: 600; }
+.muted { color: var(--muted); }
+
+/* sub-pages (releases) */
+.page-head { padding: 40px 0 8px; }
+.page-head h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); font-weight: 800; }
+.page-head .lead { margin-left: 0; max-width: 720px; }
+.page-head .cta { justify-content: flex-start; }
+.page-head .meta { justify-content: flex-start; }
+.howto { padding: 24px 0 8px; }
+.howto ul { padding-left: 20px; color: var(--muted); }
+.howto li { margin-bottom: 8px; }
+.howto li b { color: var(--fg); }
+
+.releases { padding: 24px 0 0; }
+.release { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 20px 22px; margin-bottom: 18px; }
+.release header h2 { font-size: 1.4rem; margin: 0 0 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.release header h2 a { color: var(--fg); }
+.release header p { margin: 0 0 14px; font-size: .92rem; }
+.assets { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.asset { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid var(--bd); border-radius: 10px; background: var(--bg); color: var(--fg); }
+.asset:hover { text-decoration: none; border-color: var(--accent); }
+.asset-name { font-weight: 700; display: flex; flex-direction: column; }
+.asset-name small { font-weight: 400; color: var(--muted); font-family: ui-monospace, Consolas, monospace; font-size: .78rem; }
+.asset-meta { color: var(--muted); font-size: .85rem; }
+.notes { color: var(--fg); font-size: .97rem; }
+.notes h3, .notes h4, .notes h5, .notes h6 { margin: 14px 0 6px; font-size: 1.05rem; }
+.notes p { margin: 8px 0; }
+.notes ul, .notes ol { padding-left: 22px; margin: 6px 0; }
+.notes li { margin: 3px 0; }
+.notes pre { margin: 10px 0; }

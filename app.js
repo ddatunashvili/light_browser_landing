@@ -34,6 +34,9 @@
   var CACHE_TTL = 15 * 60 * 1000; // 15 min: stays well under GitHub's unauthenticated rate limit
 
   var $ = function (id) { return document.getElementById(id); };
+  var lang = (document.documentElement.lang || 'en').slice(0, 2);
+  var T = lang === 'ka' ? { released: 'გამოვიდა', latest: 'უახლესი ვერსია', locale: 'ka-GE' }
+                        : { released: 'released', latest: 'latest release', locale: 'en-US' };
 
   function fmtSize(bytes) {
     if (!bytes) return '';
@@ -41,12 +44,12 @@
     return mb >= 1 ? mb.toFixed(1) + ' MB' : Math.round(bytes / 1024) + ' KB';
   }
   function fmtDate(iso) {
-    try { return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }); }
+    try { return new Date(iso).toLocaleDateString(T.locale, { year: 'numeric', month: 'short', day: 'numeric' }); }
     catch (e) { return ''; }
   }
 
   function apply(rel) {
-    if (!rel || !rel.tag_name) return;
+    if (!rel || !rel.tag_name || !$('version')) return;
     var assets = rel.assets || [];
     var byName = {};
     assets.forEach(function (a) { byName[a.name] = a; });
@@ -63,26 +66,23 @@
 
     var parts = ['Windows 10/11 · 64-bit'];
     if (setup && setup.size) parts.push(fmtSize(setup.size));
-    if (rel.published_at) parts.push('released ' + fmtDate(rel.published_at));
-    $('details').textContent = parts.join(' · ');
+    if (rel.published_at) parts.push(T.released + ' ' + fmtDate(rel.published_at));
+    if ($('details')) $('details').textContent = parts.join(' · ');
 
-    if (setup && setup.browser_download_url) {
+    if (setup && setup.browser_download_url && $('download')) {
       $('download').href = setup.browser_download_url;
       $('download').setAttribute('download', 'LightBrowser-Setup.exe');
     }
-    if (portable && portable.browser_download_url) $('portable').href = portable.browser_download_url;
-    if (sum && sum.browser_download_url) {
+    if (portable && portable.browser_download_url && $('portable')) $('portable').href = portable.browser_download_url;
+    if (sum && sum.browser_download_url && $('checksum')) {
       $('checksum').href = sum.browser_download_url;
       $('checksum-wrap').hidden = false;
     }
-    if (rel.html_url) {
-      var rn = $('release-notes-link');
-      rn.querySelector('a').href = rel.html_url;
-      rn.hidden = false;
-    }
+    if ($('release-notes-link')) $('release-notes-link').hidden = false;   // points at /releases/
   }
 
   function load() {
+    if (!$('version')) return;
     try {
       var cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if (cached && Date.now() - cached.t < CACHE_TTL) { apply(cached.rel); return; }
@@ -96,7 +96,7 @@
       })
       .catch(function () {
         // Leave the static "latest" links in place; they still resolve on GitHub.
-        $('version').textContent = 'latest release';
+        $('version').textContent = T.latest;
       });
   }
 

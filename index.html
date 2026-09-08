@@ -4,51 +4,91 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Light Browser — fast, minimal Windows browser with a built-in ad blocker</title>
-  <meta name="description" content="Light Browser is a ~2 MB native Windows browser on the Chromium engine already in Windows. Ad blocker, tab sleeping, end-to-end-encrypted sync, import from other browsers, auto-updates.">
-  <meta property="og:title" content="Light Browser">
-  <meta property="og:description" content="Fast, minimal Windows browser with a built-in ad blocker and encrypted sync.">
-  <meta property="og:image" content="screenshot.jpg">
+  <meta name="description" content="Light Browser is a ~2 MB native Windows browser on the Chromium engine already in Windows. Auto-updating ad blocker that skips YouTube ads, tab sleeping, end-to-end-encrypted sync, smart address bar, import from Chrome, Edge, Firefox and more. Free download.">
+  <meta name="keywords" content="light browser, lightweight browser, fast windows browser, ad blocker browser, youtube ad blocker, minimal browser, webview2 browser, low memory browser, private browser, encrypted sync, password manager, free browser download, ბრაუზერი">
+  <meta name="author" content="404 Friends">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#2563eb">
   <link rel="canonical" href="https://lightbrowser.net/">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="404 Friends">
-  <meta name="keywords" content="light browser, fast windows browser, ad blocker browser, minimal browser, webview2 browser, private browser, encrypted sync, password manager">
+  <link rel="alternate" hreflang="en" href="https://lightbrowser.net/">
+  <link rel="alternate" hreflang="ka" href="https://lightbrowser.net/ka/">
+  <link rel="alternate" hreflang="x-default" href="https://lightbrowser.net/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lightbrowser.net/">
   <meta property="og:site_name" content="Light Browser">
-  <meta property="og:image:width" content="1400">
-  <meta property="og:image:height" content="758">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ka_GE">
+  <meta property="og:title" content="Light Browser — fast, minimal Windows browser">
+  <meta property="og:description" content="~2 MB native browser with an auto-updating ad blocker, YouTube ad skipping, encrypted sync and a smart address bar. Free for Windows 10/11.">
+  <meta property="og:image" content="https://lightbrowser.net/og-image.png">
+  <meta property="og:image:secure_url" content="https://lightbrowser.net/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Light Browser logo: a white lightning bolt on a blue gradient">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Light Browser">
-  <meta name="twitter:description" content="Fast, minimal Windows browser with a built-in ad blocker, password manager and encrypted sync.">
-  <meta name="twitter:image" content="https://lightbrowser.net/screenshot.jpg">
-  <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="logo.png">
-  <link rel="stylesheet" href="style.css">
+  <meta name="twitter:title" content="Light Browser — fast, minimal Windows browser">
+  <meta name="twitter:description" content="~2 MB native browser with an auto-updating ad blocker, YouTube ad skipping, encrypted sync and a smart address bar.">
+  <meta name="twitter:image" content="https://lightbrowser.net/og-image.png">
+  <meta name="twitter:image:alt" content="Light Browser logo">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="stylesheet" href="/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Light Browser",
-    "operatingSystem": "Windows 10, Windows 11",
-    "applicationCategory": "BrowserApplication",
-    "description": "Minimal, fast Windows browser with a built-in ad blocker, password manager and end-to-end-encrypted sync.",
-    "url": "https://lightbrowser.net/",
-    "downloadUrl": "https://github.com/ddatunashvili/light_browser/releases/latest",
-    "softwareVersion": "1.1.3",
-    "license": "https://opensource.org/licenses/MIT",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "author": { "@type": "Organization", "name": "404 Friends", "url": "https://404friends.ge" }
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://lightbrowser.net/#app",
+        "name": "Light Browser",
+        "alternateName": "LightBrowser",
+        "operatingSystem": "Windows 10, Windows 11",
+        "applicationCategory": "BrowserApplication",
+        "applicationSubCategory": "Web browser",
+        "description": "Minimal, fast Windows browser with an auto-updating ad blocker, YouTube ad skipping, password manager, smart address bar and end-to-end-encrypted sync.",
+        "url": "https://lightbrowser.net/",
+        "image": "https://lightbrowser.net/logo.png",
+        "screenshot": "https://lightbrowser.net/screenshot.jpg",
+        "downloadUrl": "https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser-Setup.exe",
+        "installUrl": "https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser-Setup.exe",
+        "releaseNotes": "https://lightbrowser.net/releases/",
+        "fileSize": "2MB",
+        "inLanguage": ["en", "ka"],
+        "license": "https://opensource.org/licenses/MIT",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://lightbrowser.net/#org" },
+        "publisher": { "@id": "https://lightbrowser.net/#org" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://lightbrowser.net/#org",
+        "name": "404 Friends",
+        "url": "https://404friends.ge",
+        "logo": "https://lightbrowser.net/404friends.png"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://lightbrowser.net/#site",
+        "url": "https://lightbrowser.net/",
+        "name": "Light Browser",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://lightbrowser.net/#org" }
+      }
+    ]
   }
   </script>
 </head>
 <body>
   <header class="top">
-    <a class="brand" href="#"><img src="logo.svg" alt="" width="28" height="28"> Light Browser</a>
+    <a class="brand" href="/"><img src="/logo.svg" alt="" width="28" height="28"> Light Browser</a>
     <nav>
       <a href="#features">Features</a>
       <a href="#security">Security</a>
-      <a href="https://github.com/ddatunashvili/light_browser/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="/releases/">Releases</a>
+      <a class="lang" href="/ka/" lang="ka" hreflang="ka" title="ქართული">ქარ</a>
       <button id="theme-toggle" class="theme-btn" type="button" title="Switch theme" aria-label="Switch theme">
         <svg class="ico-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
         <svg class="ico-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
@@ -58,10 +98,10 @@
 
   <main>
     <section class="hero">
-      <img class="hero-logo" src="logo.svg" alt="Light Browser logo" width="88" height="88">
+      <img class="hero-logo" src="/logo.svg" alt="Light Browser logo" width="88" height="88">
       <h1>Browse light.<br><span>Block ads. Sync safely.</span></h1>
       <p class="lead">A ~2 MB native Windows browser on the Chromium engine already inside Windows 11.
-        Built-in ad blocker, tab sleeping, end-to-end-encrypted sync, one-click import from other browsers.</p>
+        Auto-updating ad blocker that skips YouTube ads, tab sleeping, end-to-end-encrypted sync, one-click import from other browsers.</p>
 
       <div class="cta">
         <a id="download" class="btn primary"
@@ -76,10 +116,11 @@
       <p class="meta">
         <span id="version" class="badge">latest</span>
         <span id="details">Windows 10/11 · 64-bit</span>
+        <a href="/releases/">What's new</a>
       </p>
 
       <figure class="shot">
-        <img src="screenshot.jpg" alt="Light Browser showing Wikipedia with the ad blocker counter in the toolbar" width="1400" height="758" loading="eager">
+        <img src="/screenshot.jpg" alt="Light Browser showing Wikipedia with the ad blocker counter in the toolbar" width="1400" height="758" loading="eager">
       </figure>
     </section>
 
@@ -87,24 +128,26 @@
       <h2>Why it's fast</h2>
       <div class="grid">
         <article><h3>Tiny native shell</h3><p>~2 MB C++ Win32 app. No Electron, no bundled engine. Rendering is Chromium via Microsoft Edge WebView2, which Windows 11 already ships.</p></article>
-        <article><h3>Ad blocker built in</h3><p>Network-level host and URL rules plus cosmetic filters. Every request passes through it. A live counter shows what was blocked.</p></article>
-        <article><h3>Tab sleeping</h3><p>Background tabs drop to a low memory target and get suspended after 30 seconds idle. Near-zero CPU until you click them.</p></article>
+        <article><h3>Ad blocker that keeps itself current</h3><p>Network-level host and URL rules plus cosmetic filters, refreshed every day from public block lists and our own curated rules. A live counter shows what was blocked.</p></article>
+        <article><h3>YouTube, Spotify, Twitch</h3><p>In-stream YouTube ads are skipped or fast-forwarded muted, the "ad blockers are not allowed" dialog is dismissed, and Spotify and Twitch ads play silently.</p></article>
+        <article><h3>Smart address bar</h3><p>Ranked suggestions from your bookmarks and history, plus popular sites and pages other Light Browser users visit, grouped by kind: video, music, dev, news and more. Click or arrow-select.</p></article>
+        <article><h3>Tab sleeping and deep sleep</h3><p>Background tabs suspend after 30 seconds and unload after 10 minutes idle. Minimize for a few minutes and the whole engine shuts down, leaving a few MB.</p></article>
         <article><h3>Import everything</h3><p>Bookmarks, history, saved logins and autofill from Chrome, Edge, Brave, Opera, Vivaldi and Firefox. Firefox passwords decrypt through its own key store.</p></article>
         <article><h3>Encrypted sync</h3><p>Bookmarks and passwords sync across devices. Encrypted on your PC with your passphrase. The server only ever sees ciphertext.</p></article>
         <article><h3>Password manager</h3><p>Saved logins in one place: search, reveal, copy, delete, and generate strong passwords. Autofill signs you in.</p></article>
-        <article><h3>Settings that follow you</h3><p>Theme, bookmarks bar and ad-blocker state sync with your account, so a new PC comes up configured the way you left it.</p></article>
-        <article><h3>Light and dark</h3><p>Follows your Windows theme, or pin it to light or dark. The whole window follows, title bar included.</p></article>
         <article><h3>Resource monitor</h3><p>See live CPU, memory, GPU and GPU-memory use with a per-process breakdown, and cap memory so background tabs suspend when you go over.</p></article>
-        <article><h3>Smart address bar</h3><p>Type a few letters and get ranked suggestions from your bookmarks and history, so the site you want is one keystroke away.</p></article>
-        <article><h3>Developer ready</h3><p>Full Chromium DevTools with <kbd>F12</kbd> or right-click → Inspect. Google search straight from the address bar.</p></article>
+        <article><h3>Light and dark</h3><p>Follows your Windows theme, or pin it to light or dark. The whole window follows, title bar included.</p></article>
+        <article><h3>Developer ready</h3><p>Full Chromium DevTools with <kbd>F12</kbd> or right-click → Inspect. Google search straight from the address bar. Cloudflare DNS over HTTPS by default.</p></article>
+        <article><h3>Auto-update</h3><p>New versions install silently from GitHub Releases after a SHA-256 check. See the <a href="/releases/">release history</a>.</p></article>
       </div>
     </section>
 
     <section id="security" class="security">
-      <h2>Security and updates</h2>
+      <h2>Security and privacy</h2>
       <ul>
         <li><b>Auto-update.</b> The browser checks GitHub Releases on startup and from its About page. Every update is verified with SHA-256 before it installs.</li>
         <li><b>End-to-end encryption.</b> Synced data uses AES-256-GCM under a key derived from your passphrase (PBKDF2-SHA256, 210k rounds). Forget the passphrase and it cannot be recovered. That is the point.</li>
+        <li><b>Shared suggestions, no tracking.</b> The address bar's shared site pool stores only public site addresses and page titles with visit counts. No user ids, no query strings, no mail, banking, messaging or account pages. You can turn sharing off in settings.</li>
         <li><b>Verify your download.</b> Each release ships <code>LightBrowser-Setup.exe.sha256</code>.
           <span id="checksum-wrap" hidden>Latest: <a id="checksum" href="#" target="_blank" rel="noopener">checksum file</a>.</span></li>
       </ul>
@@ -120,6 +163,8 @@ Get-Content LightBrowser-Setup.exe.sha256</code></pre>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></td><td>Reopen closed tab</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td>Bookmark page (or the star in the address bar)</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd></td><td>Password manager</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd></td><td>Resource monitor</td></tr>
+        <tr><td><kbd>Ctrl</kbd>+<kbd>+</kbd> / <kbd>Ctrl</kbd>+<kbd>-</kbd> / <kbd>Ctrl</kbd>+<kbd>0</kbd></td><td>Zoom in / out / reset</td></tr>
         <tr><td><kbd>F12</kbd></td><td>Inspect (DevTools)</td></tr>
         <tr><td><kbd>F11</kbd></td><td>Fullscreen</td></tr>
         <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Del</kbd></td><td>Clear cache</td></tr>
@@ -129,13 +174,13 @@ Get-Content LightBrowser-Setup.exe.sha256</code></pre>
 
   <footer>
     <a class="madeby" href="https://404friends.ge" target="_blank" rel="noopener">
-      <img src="404friends.png" alt="404 Friends" width="34" height="34">
+      <img src="/404friends.png" alt="404 Friends" width="34" height="34">
       <span>Made by <b>404 Friends</b><small>404friends.ge</small></span>
     </a>
-    <p>Light Browser · MIT License · <a href="https://github.com/ddatunashvili/light_browser" target="_blank" rel="noopener">GitHub</a></p>
-    <p id="release-notes-link" hidden><a href="#" target="_blank" rel="noopener">Release notes</a></p>
+    <p>Light Browser · MIT License · <a href="https://github.com/ddatunashvili/light_browser" target="_blank" rel="noopener">GitHub</a> · <a href="/releases/">Releases</a> · <a href="/ka/" lang="ka">ქართული</a></p>
+    <p id="release-notes-link" hidden><a href="/releases/">Release notes</a></p>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
