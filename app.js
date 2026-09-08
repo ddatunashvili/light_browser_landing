@@ -1,3 +1,29 @@
+// Theme: "system" (default), "light" or "dark", remembered per browser.
+(function () {
+  var KEY = 'lb-theme';
+  var root = document.documentElement;
+  function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function apply(v) {
+    if (v === 'light' || v === 'dark') root.setAttribute('data-theme', v);
+    else root.removeAttribute('data-theme');
+  }
+  function effective() {
+    var s = saved();
+    if (s === 'light' || s === 'dark') return s;
+    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  apply(saved());
+  document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var next = effective() === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem(KEY, next); } catch (e) {}
+      apply(next);
+    });
+  });
+})();
+
 // Pulls the latest release from GitHub and updates the download links, version,
 // date, size and checksum link. The static hrefs already point at
 // /releases/latest/download/<asset>, so the page works even if this script fails.
