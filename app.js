@@ -64,7 +64,7 @@
     v.className = 'badge live';
     v.title = rel.name || '';
 
-    var parts = ['Windows 10/11 · 64-bit'];
+    var parts = ['64-bit'];
     if (setup && setup.size) parts.push(fmtSize(setup.size));
     if (rel.published_at) parts.push(T.released + ' ' + fmtDate(rel.published_at));
     if ($('details')) $('details').textContent = parts.join(' · ');
@@ -79,8 +79,8 @@
     if (deb && $('deb')) { $('deb').href = deb.browser_download_url; }
     if (tgz && $('tgz')) { $('tgz').href = tgz.browser_download_url; }
     if ($('linux-details')) {
-      if (deb || tgz) $('linux-details').textContent = 'Ubuntu 24.04+ / Debian 12+ · amd64' + (deb && deb.size ? ' · ' + fmtSize(deb.size) : '');
-      else $('linux-details').hidden = true;
+      if (deb || tgz) $('linux-details').textContent = 'Ubuntu 24.04+ · Debian 12+ · amd64' + (deb && deb.size ? ' · ' + fmtSize(deb.size) : '');
+      else $('linux-details').textContent = 'Linux build coming with the next release';
     }
     if (sum && sum.browser_download_url && $('checksum')) {
       $('checksum').href = sum.browser_download_url;

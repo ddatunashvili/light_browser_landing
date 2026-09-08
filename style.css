@@ -77,8 +77,15 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 20px 60px; }
 .lead { max-width: 680px; margin: 0 auto 28px; color: var(--muted); font-size: 1.12rem; }
 
 .cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-.cta.linux { margin-top: 10px; }
-.cta.linux .btn { padding: 10px 18px; font-size: .95rem; }
+/* platform download cards */
+.platforms { display: grid; grid-template-columns: repeat(2, minmax(240px, 300px)); gap: 16px; justify-content: center; margin: 6px 0 4px; }
+.plat { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 18px 18px 14px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+.plat-h { display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; color: var(--fg); margin-bottom: 2px; }
+.plat-h svg { color: var(--accent); }
+.plat .btn { justify-content: center; }
+.plat .btn.small { padding: 9px 14px; font-size: .92rem; font-weight: 600; }
+.plat-meta { margin: 2px 0 0; color: var(--muted); font-size: .84rem; text-align: center; }
+@media (max-width: 640px) { .platforms { grid-template-columns: 1fr; } }
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 14px 24px; border-radius: 12px; font-weight: 700; font-size: 1.02rem;

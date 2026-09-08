@@ -103,27 +103,23 @@
       <p class="lead">A ~2 MB native browser for Windows and Linux, on the web engine your system already has: Chromium via WebView2 on Windows, WebKitGTK on Linux.
         Auto-updating ad blocker with EasyList element hiding that skips YouTube ads, tab sleeping, lazy session restore, end-to-end-encrypted sync, one-click import from other browsers.</p>
 
-      <div class="cta">
-        <a id="download" class="btn primary"
-           href="https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser-Setup.exe">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>
-          Download for Windows
-        </a>
-        <a id="portable" class="btn ghost"
-           href="https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser.exe">Portable .exe</a>
-      </div>
-      <div class="cta linux">
-        <a id="deb" class="btn ghost" href="https://github.com/ddatunashvili/light_browser/releases/latest">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>
-          Linux .deb
-        </a>
-        <a id="tgz" class="btn ghost" href="https://github.com/ddatunashvili/light_browser/releases/latest">Linux tarball</a>
+      <div class="platforms">
+        <div class="plat">
+          <div class="plat-h"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 11 4.4v7.1H3zm0 13 8 1.1v-7H3zm9 1.2L22 21v-8.4h-10zm0-15.4v7.2h10V3z"/></svg><span>Windows 10 / 11</span></div>
+          <a id="download" class="btn primary" href="https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser-Setup.exe"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>Download installer</a>
+          <a id="portable" class="btn ghost small" href="https://github.com/ddatunashvili/light_browser/releases/latest/download/LightBrowser.exe">Portable .exe</a>
+          <p class="plat-meta" id="details">64-bit</p>
+        </div>
+        <div class="plat">
+          <div class="plat-h"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c-2.6 0-4 2-4 4.6 0 1.4-.6 2.3-1.4 3.5C5.4 11.9 4 13.8 4 16c0 .6.1 1.1.3 1.6-.8.4-1.3 1-1.3 1.7 0 1 1.1 1.7 2.5 1.7.9 0 1.7-.3 2.2-.8.9.5 2.1.8 3.3.8h2c1.2 0 2.4-.3 3.3-.8.5.5 1.3.8 2.2.8 1.4 0 2.5-.7 2.5-1.7 0-.7-.5-1.3-1.3-1.7.2-.5.3-1 .3-1.6 0-2.2-1.4-4.1-2.6-5.9C16.6 8.9 16 8 16 6.6 16 4 14.6 2 12 2zm-1.5 4.2c.5 0 .8.5.8 1.1s-.3 1.1-.8 1.1-.8-.5-.8-1.1.3-1.1.8-1.1zm3 0c.5 0 .8.5.8 1.1s-.3 1.1-.8 1.1-.8-.5-.8-1.1.3-1.1.8-1.1zM12 9.2c.9 0 2.2.6 2.2 1.1 0 .6-1.3 1.5-2.2 1.5s-2.2-.9-2.2-1.5c0-.5 1.3-1.1 2.2-1.1z"/></svg><span>Linux</span></div>
+          <a id="deb" class="btn primary" href="https://github.com/ddatunashvili/light_browser/releases/latest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg>Download .deb</a>
+          <a id="tgz" class="btn ghost small" href="https://github.com/ddatunashvili/light_browser/releases/latest">Tarball (.tar.gz)</a>
+          <p class="plat-meta" id="linux-details">Ubuntu 24.04+ · Debian 12+ · amd64</p>
+        </div>
       </div>
 
       <p class="meta">
         <span id="version" class="badge">latest</span>
-        <span id="details">Windows 10/11 · 64-bit</span>
-        <span id="linux-details">Ubuntu 24.04+ / Debian 12+ · amd64</span>
         <a href="/releases/">What's new</a>
       </p>
 
