@@ -76,6 +76,9 @@
     if (portable && portable.browser_download_url && $('portable')) $('portable').href = portable.browser_download_url;
     var deb = null, tgz = null;
     assets.forEach(function (a) { if (/^lightbrowser_.*\.deb$/.test(a.name)) deb = a; if (/^lightbrowser-.*\.tar\.gz$/.test(a.name)) tgz = a; });
+    function sha(a) { var d = String((a && a.digest) || ''); return /^sha256:[0-9a-f]{64}$/.test(d) ? d.slice(7) : ''; }
+    function vt(id, a) { var el = $(id); if (!el) return; var h = sha(a); if (h) { el.href = 'https://www.virustotal.com/gui/file/' + h; el.hidden = false; } }
+    vt('vt-win', setup); vt('vt-lin', deb);
     if (deb && $('deb')) { $('deb').href = deb.browser_download_url; }
     if (tgz && $('tgz')) { $('tgz').href = tgz.browser_download_url; }
     if ($('linux-details')) {

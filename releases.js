@@ -9,11 +9,11 @@
   var lang = (document.documentElement.lang || 'en').slice(0, 2);
   var T = lang === 'ka' ? {
     latest: 'უახლესი', pre: 'წინასწარი', installer: 'Windows ინსტალერი', portable: 'Windows პორტატული', checksum: 'checksum', deb: 'Linux .deb (Ubuntu/Debian)', tgz: 'Linux არქივი (.tar.gz)',
-    downloads: 'ჩამოტვირთვა', released: 'გამოვიდა', noNotes: 'ამ ვერსიას შენიშვნები არ აქვს.',
+    downloads: 'ჩამოტვირთვა', released: 'გამოვიდა', noNotes: 'ამ ვერსიას შენიშვნები არ აქვს.', checksums: 'Checksums', other: 'სხვა ფაილები', win: 'Windows', lin: 'Linux', vtTitle: 'ამ ფაილის სკანირების შედეგი VirusTotal-ზე (70+ ანტივირუსი)',
     error: 'ვერსიების სია ვერ ჩაიტვირთა. იხილეთ GitHub-ზე.', empty: 'ვერსიები ჯერ არ არის.', locale: 'ka-GE'
   } : {
     latest: 'Latest', pre: 'Pre-release', installer: 'Windows installer', portable: 'Windows portable', checksum: 'checksum', deb: 'Linux .deb (Ubuntu/Debian)', tgz: 'Linux tarball (.tar.gz)',
-    downloads: 'downloads', released: 'released', noNotes: 'No notes for this release.',
+    downloads: 'downloads', released: 'released', noNotes: 'No notes for this release.', checksums: 'Checksums', other: 'Other files', win: 'Windows', lin: 'Linux', vtTitle: 'Scan result for this exact file on VirusTotal (70+ antivirus engines)',
     error: 'Could not load the release list. See GitHub.', empty: 'No releases yet.', locale: 'en-US'
   };
 
@@ -64,11 +64,24 @@
     return out.join('\n');
   }
 
-  function assetRow(a, label) {
-    return '<a class="asset" href="' + esc(a.browser_download_url) + '" rel="noopener">' +
-      '<span class="asset-name">' + esc(label) + '<small>' + esc(a.name) + '</small></span>' +
-      '<span class="asset-meta">' + fmtSize(a.size) + (a.download_count ? ' · ' + fmtNum(a.download_count) + ' ' + T.downloads : '') + '</span></a>';
+  var ICON_WIN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5 11 4.4v7.1H3zm0 13 8 1.1v-7H3zm9 1.2L22 21v-8.4h-10zm0-15.4v7.2h10V3z"/></svg>';
+  var ICON_LIN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c-2.6 0-4 2-4 4.6 0 1.4-.6 2.3-1.4 3.5C5.4 11.9 4 13.8 4 16c0 .6.1 1.1.3 1.6-.8.4-1.3 1-1.3 1.7 0 1 1.1 1.7 2.5 1.7.9 0 1.7-.3 2.2-.8.9.5 2.1.8 3.3.8h2c1.2 0 2.4-.3 3.3-.8.5.5 1.3.8 2.2.8 1.4 0 2.5-.7 2.5-1.7 0-.7-.5-1.3-1.3-1.7.2-.5.3-1 .3-1.6 0-2.2-1.4-4.1-2.6-5.9C16.6 8.9 16 8 16 6.6 16 4 14.6 2 12 2z"/></svg>';
+  function sha(a) { var d = String(a.digest || ''); return /^sha256:[0-9a-f]{64}$/.test(d) ? d.slice(7) : ''; }
+  function vtLink(a, cls) {
+    var h = sha(a); if (!h) return '';
+    return '<a class="' + (cls || 'vt') + '" href="https://www.virustotal.com/gui/file/' + h + '" target="_blank" rel="noopener" title="' + T.vtTitle + '">' + VT_SVG + ' VirusTotal</a>';
   }
+  function assetRow(a, label, os) {
+    return '<div class="asset">' +
+      '<a class="asset-main" href="' + esc(a.browser_download_url) + '" rel="noopener">' +
+      '<span class="asset-os">' + (os === 'lin' ? ICON_LIN : ICON_WIN) + '<span>' + (os === 'lin' ? T.lin : T.win) + '</span></span>' +
+      '<span class="asset-name">' + esc(label) + '</span>' +
+      '<span class="asset-file">' + esc(a.name) + '</span>' +
+      '<span class="asset-meta">' + fmtSize(a.size) + (a.download_count ? ' · ' + fmtNum(a.download_count) + ' ' + T.downloads : '') + '</span></a>' +
+      vtLink(a) + '</div>';
+  }
+  var VT_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>';
+  function sumLink(a) { return '<a href="' + esc(a.browser_download_url) + '" rel="noopener" title="' + esc(a.name) + '">' + esc(a.name.replace(/\.sha256$/, '')) + '</a>'; }
 
   function render(list) {
     var root = document.getElementById('releases');
@@ -80,13 +93,17 @@
       var assets = r.assets || [], by = {};
       assets.forEach(function (a) { by[a.name] = a; });
       var total = assets.reduce(function (s, a) { return s + (a.download_count || 0); }, 0);
-      var rows = [];
-      if (by['LightBrowser-Setup.exe']) rows.push(assetRow(by['LightBrowser-Setup.exe'], T.installer));
-      if (by['LightBrowser.exe']) rows.push(assetRow(by['LightBrowser.exe'], T.portable));
-      assets.forEach(function (a) { if (/^lightbrowser_.*\.deb$/.test(a.name)) rows.push(assetRow(a, T.deb)); });
-      assets.forEach(function (a) { if (/^lightbrowser-.*\.tar\.gz$/.test(a.name)) rows.push(assetRow(a, T.tgz)); });
-      if (by['LightBrowser-Setup.exe.sha256']) rows.push(assetRow(by['LightBrowser-Setup.exe.sha256'], T.checksum));
-      assets.forEach(function (a) { if (!/^LightBrowser(-Setup)?\.exe(\.sha256)?$/.test(a.name) && !/^lightbrowser.*\.(deb|tar\.gz)$/.test(a.name)) rows.push(assetRow(a, a.name)); });
+      var rows = [], sums = [], other = [];
+      if (by['LightBrowser-Setup.exe']) rows.push(assetRow(by['LightBrowser-Setup.exe'], T.installer, 'win'));
+      if (by['LightBrowser.exe']) rows.push(assetRow(by['LightBrowser.exe'], T.portable, 'win'));
+      assets.forEach(function (a) { if (/^lightbrowser_.*\.deb$/.test(a.name)) rows.push(assetRow(a, T.deb, 'lin')); });
+      assets.forEach(function (a) { if (/^lightbrowser-.*\.tar\.gz$/.test(a.name)) rows.push(assetRow(a, T.tgz, 'lin')); });
+      assets.forEach(function (a) {
+        if (/\.sha256$/.test(a.name)) sums.push(sumLink(a));
+        else if (!/^LightBrowser(-Setup)?\.exe$/.test(a.name) && !/^lightbrowser.*\.(deb|tar\.gz)$/.test(a.name)) other.push(sumLink(a));
+      });
+      var extra = (sums.length ? '<p class="sums"><b>' + T.checksums + ':</b> ' + sums.join(' · ') + '</p>' : '') +
+                  (other.length ? '<p class="sums"><b>' + T.other + ':</b> ' + other.join(' · ') + '</p>' : '');
       var notes = (r.body || '').trim();
       return '<article class="release" id="' + esc(r.tag_name) + '">' +
         '<header><h2><a href="#' + esc(r.tag_name) + '">v' + esc(ver) + '</a>' +
@@ -95,7 +112,7 @@
         '<p class="muted">' + (r.published_at ? T.released + ' ' + fmtDate(r.published_at) : '') +
         (total ? ' · ' + fmtNum(total) + ' ' + T.downloads : '') +
         ' · <a href="' + esc(r.html_url) + '" target="_blank" rel="noopener">GitHub</a></p></header>' +
-        (rows.length ? '<div class="assets">' + rows.join('') + '</div>' : '') +
+        (rows.length ? '<div class="assets">' + rows.join('') + '</div>' : '') + extra +
         '<div class="notes">' + (notes ? markdown(notes) : '<p class="muted">' + T.noNotes + '</p>') + '</div>' +
         '</article>';
     }).join('');
