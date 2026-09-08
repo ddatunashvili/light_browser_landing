@@ -9,11 +9,11 @@
   var lang = (document.documentElement.lang || 'en').slice(0, 2);
   var T = lang === 'ka' ? {
     latest: 'უახლესი', pre: 'წინასწარი', installer: 'Windows ინსტალერი', portable: 'Windows პორტატული', checksum: 'checksum', deb: 'Linux .deb (Ubuntu/Debian)', tgz: 'Linux არქივი (.tar.gz)',
-    downloads: 'ჩამოტვირთვა', released: 'გამოვიდა', noNotes: 'ამ ვერსიას შენიშვნები არ აქვს.', checksums: 'Checksums', other: 'სხვა ფაილები', win: 'Windows', lin: 'Linux', vtTitle: 'ამ ფაილის სკანირების შედეგი VirusTotal-ზე (70+ ანტივირუსი)',
+    downloads: 'ჩამოტვირთვა', released: 'გამოვიდა', noNotes: 'ამ ვერსიას შენიშვნები არ აქვს.', checksums: 'Checksums', other: 'სხვა ფაილები', win: 'Windows', lin: 'Linux', vtTitle: 'ამ ფაილის სკანირების შედეგი VirusTotal-ზე (70+ ანტივირუსი)', helper: 'იმპორტის დამხმარე, ბრაუზერი თავად ტვირთავს საჭიროებისას',
     error: 'ვერსიების სია ვერ ჩაიტვირთა. იხილეთ GitHub-ზე.', empty: 'ვერსიები ჯერ არ არის.', locale: 'ka-GE'
   } : {
     latest: 'Latest', pre: 'Pre-release', installer: 'Windows installer', portable: 'Windows portable', checksum: 'checksum', deb: 'Linux .deb (Ubuntu/Debian)', tgz: 'Linux tarball (.tar.gz)',
-    downloads: 'downloads', released: 'released', noNotes: 'No notes for this release.', checksums: 'Checksums', other: 'Other files', win: 'Windows', lin: 'Linux', vtTitle: 'Scan result for this exact file on VirusTotal (70+ antivirus engines)',
+    downloads: 'downloads', released: 'released', noNotes: 'No notes for this release.', checksums: 'Checksums', other: 'Other files', win: 'Windows', lin: 'Linux', vtTitle: 'Scan result for this exact file on VirusTotal (70+ antivirus engines)', helper: 'import helper, the browser downloads it itself when needed',
     error: 'Could not load the release list. See GitHub.', empty: 'No releases yet.', locale: 'en-US'
   };
 
@@ -99,6 +99,7 @@
       assets.forEach(function (a) { if (/^lightbrowser_.*\.deb$/.test(a.name)) rows.push(assetRow(a, T.deb, 'lin')); });
       assets.forEach(function (a) { if (/^lightbrowser-.*\.tar\.gz$/.test(a.name)) rows.push(assetRow(a, T.tgz, 'lin')); });
       assets.forEach(function (a) {
+        if (a.name === 'lbimport.exe') { other.push(sumLink(a) + ' <span class="muted">(' + T.helper + ')</span>'); return; }
         if (/\.sha256$/.test(a.name)) sums.push(sumLink(a));
         else if (!/^LightBrowser(-Setup)?\.exe$/.test(a.name) && !/^lightbrowser.*\.(deb|tar\.gz)$/.test(a.name)) other.push(sumLink(a));
       });
