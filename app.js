@@ -74,6 +74,14 @@
       $('download').setAttribute('download', 'LightBrowser-Setup.exe');
     }
     if (portable && portable.browser_download_url && $('portable')) $('portable').href = portable.browser_download_url;
+    var deb = null, tgz = null;
+    assets.forEach(function (a) { if (/^lightbrowser_.*\.deb$/.test(a.name)) deb = a; if (/^lightbrowser-.*\.tar\.gz$/.test(a.name)) tgz = a; });
+    if (deb && $('deb')) { $('deb').href = deb.browser_download_url; }
+    if (tgz && $('tgz')) { $('tgz').href = tgz.browser_download_url; }
+    if ($('linux-details')) {
+      if (deb || tgz) $('linux-details').textContent = 'Ubuntu 24.04+ / Debian 12+ · amd64' + (deb && deb.size ? ' · ' + fmtSize(deb.size) : '');
+      else $('linux-details').hidden = true;
+    }
     if (sum && sum.browser_download_url && $('checksum')) {
       $('checksum').href = sum.browser_download_url;
       $('checksum-wrap').hidden = false;

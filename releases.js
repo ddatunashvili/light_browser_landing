@@ -8,11 +8,11 @@
   var CACHE_TTL = 15 * 60 * 1000;
   var lang = (document.documentElement.lang || 'en').slice(0, 2);
   var T = lang === 'ka' ? {
-    latest: 'უახლესი', pre: 'წინასწარი', installer: 'ინსტალერი', portable: 'პორტატული', checksum: 'checksum',
+    latest: 'უახლესი', pre: 'წინასწარი', installer: 'Windows ინსტალერი', portable: 'Windows პორტატული', checksum: 'checksum', deb: 'Linux .deb (Ubuntu/Debian)', tgz: 'Linux არქივი (.tar.gz)',
     downloads: 'ჩამოტვირთვა', released: 'გამოვიდა', noNotes: 'ამ ვერსიას შენიშვნები არ აქვს.',
     error: 'ვერსიების სია ვერ ჩაიტვირთა. იხილეთ GitHub-ზე.', empty: 'ვერსიები ჯერ არ არის.', locale: 'ka-GE'
   } : {
-    latest: 'Latest', pre: 'Pre-release', installer: 'Installer', portable: 'Portable', checksum: 'checksum',
+    latest: 'Latest', pre: 'Pre-release', installer: 'Windows installer', portable: 'Windows portable', checksum: 'checksum', deb: 'Linux .deb (Ubuntu/Debian)', tgz: 'Linux tarball (.tar.gz)',
     downloads: 'downloads', released: 'released', noNotes: 'No notes for this release.',
     error: 'Could not load the release list. See GitHub.', empty: 'No releases yet.', locale: 'en-US'
   };
@@ -83,8 +83,10 @@
       var rows = [];
       if (by['LightBrowser-Setup.exe']) rows.push(assetRow(by['LightBrowser-Setup.exe'], T.installer));
       if (by['LightBrowser.exe']) rows.push(assetRow(by['LightBrowser.exe'], T.portable));
+      assets.forEach(function (a) { if (/^lightbrowser_.*\.deb$/.test(a.name)) rows.push(assetRow(a, T.deb)); });
+      assets.forEach(function (a) { if (/^lightbrowser-.*\.tar\.gz$/.test(a.name)) rows.push(assetRow(a, T.tgz)); });
       if (by['LightBrowser-Setup.exe.sha256']) rows.push(assetRow(by['LightBrowser-Setup.exe.sha256'], T.checksum));
-      assets.forEach(function (a) { if (!/^LightBrowser(-Setup)?\.exe(\.sha256)?$/.test(a.name)) rows.push(assetRow(a, a.name)); });
+      assets.forEach(function (a) { if (!/^LightBrowser(-Setup)?\.exe(\.sha256)?$/.test(a.name) && !/^lightbrowser.*\.(deb|tar\.gz)$/.test(a.name)) rows.push(assetRow(a, a.name)); });
       var notes = (r.body || '').trim();
       return '<article class="release" id="' + esc(r.tag_name) + '">' +
         '<header><h2><a href="#' + esc(r.tag_name) + '">v' + esc(ver) + '</a>' +
