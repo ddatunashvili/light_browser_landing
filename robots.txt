@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ddatunashvili.github.io/light_browser_landing/sitemap.xml
+Sitemap: https://lightbrowser.net/sitemap.xml

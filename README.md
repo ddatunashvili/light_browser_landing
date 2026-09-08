@@ -1,7 +1,7 @@
 # Light Browser — landing page
 
 Static site (vanilla HTML/CSS/JS), served by GitHub Pages:
-**https://ddatunashvili.github.io/light_browser_landing/**
+**https://lightbrowser.net/**
 
 The download buttons always point at the newest release:
 
