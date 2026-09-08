@@ -34,7 +34,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/logo.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/logo.png">
-  <link rel="stylesheet" href="/style.css?v=5">
+  <link rel="stylesheet" href="/style.css?v=6">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -143,6 +143,11 @@
         <article><h3>Resource monitor</h3><p>See live CPU, memory, GPU and GPU-memory use with a per-process breakdown, and cap memory so background tabs suspend when you go over.</p></article>
         <article><h3>Light and dark</h3><p>Follows your Windows theme, or pin it to light or dark. The whole window follows, title bar included.</p></article>
         <article><h3>Developer ready</h3><p>Full Chromium DevTools with <kbd>F12</kbd> or right-click → Inspect. Google search straight from the address bar. Cloudflare DNS over HTTPS by default.</p></article>
+        <article><h3>Privacy Engine: seven levels</h3><p>Normal, Private, Shadow, Mask, Ghost, Disposable, Ghost Internet. Pick a level for new tabs or open any tab in one. Incognito hides your history; Ghost hides your browser identity.</p></article>
+        <article><h3>Shadow and Ghost</h3><p>Shadow gives every site its own isolated environment, so sites cannot see each other. Ghost adds a fresh temporary identity per tab (<code>GHOST #A71F</code>) that vanishes when the tab closes.</p></article>
+        <article><h3>Mask: one standard device</h3><p>Canvas, WebGL, audio, fonts, screen, CPU, memory, time zone, WebRTC and client hints are standardised, not randomised, so masked users blend in with each other.</p></article>
+        <article><h3>Privacy dashboard</h3><p>Per site: trackers, cookies and scripts blocked, fingerprint attempts, cleaned tracking URLs, third-party requests, an identity-exposure gauge and a tracker relationship graph. Buttons: Hide me, Erase trail, Destroy identity.</p></article>
+        <article><h3>Personas</h3><p>Named identities such as Work, Personal or Anonymous, each with its own cookies, storage, history and permissions, running side by side.</p></article>
         <article><h3>Tabs that stay out of your way</h3><p>Pin tabs, color them into groups, and with ten or more tabs the strip turns into a vertical list. Hover a tab to see its RAM; a red dot marks heavy tabs and one click frees them.</p></article>
         <article><h3>Picks up where you left off</h3><p>Your last session comes back as sleeping placeholders. Only the tab you look at loads, so startup costs one page, not twenty.</p></article>
         <article><h3>Search your way</h3><p>Google, Bing, DuckDuckGo, Brave, Yandex, Ecosia or your own engine. Keywords jump straight to a site: <kbd>yt lofi</kbd>, <kbd>w rust</kbd>, <kbd>gh webview2</kbd>.</p></article>
@@ -156,6 +161,7 @@
     <section id="security" class="security">
       <h2>Security and privacy</h2>
       <ul>
+        <li><b>Tracker protection on every level.</b> Ad, analytics, social, crypto-mining and fingerprinting hosts are blocked from EasyList, EasyPrivacy, Fanboy's social, NoCoin and hosts lists refreshed daily. Third-party cookies never go to trackers, referrers are trimmed to the origin across sites, tracking parameters like <code>utm_</code>, <code>fbclid</code> and <code>gclid</code> are removed, and CNAME-cloaked trackers are caught through DNS over HTTPS.</li>
         <li><b>Auto-update.</b> The browser checks GitHub Releases on startup and from its About page. Every update is verified with SHA-256 before it installs.</li>
         <li><b>End-to-end encryption.</b> Synced data uses AES-256-GCM under a key derived from your passphrase (PBKDF2-SHA256, 210k rounds). Forget the passphrase and it cannot be recovered. That is the point.</li>
         <li><b>Shared suggestions, no tracking.</b> The address bar's shared site pool stores only public site addresses and page titles with visit counts. No user ids, no query strings, no mail, banking, messaging or account pages. You can turn sharing off in settings.</li>
@@ -193,6 +199,6 @@ Get-Content LightBrowser-Setup.exe.sha256</code></pre>
     <p id="release-notes-link" hidden><a href="/releases/">Release notes</a></p>
   </footer>
 
-  <script src="/app.js?v=5"></script>
+  <script src="/app.js?v=6"></script>
 </body>
 </html>
