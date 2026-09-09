@@ -148,13 +148,16 @@
         <article><h3>Mask: one standard device</h3><p>Canvas, WebGL, audio, fonts, screen, CPU, memory, time zone, WebRTC and client hints are standardised, not randomised, so masked users blend in with each other.</p></article>
         <article><h3>Privacy dashboard</h3><p>Per site: trackers, cookies and scripts blocked, fingerprint attempts, cleaned tracking URLs, third-party requests, an identity-exposure gauge and a tracker relationship graph. Buttons: Hide me, Erase trail, Destroy identity.</p></article>
         <article><h3>Personas</h3><p>Named identities such as Work, Personal or Anonymous, each with its own cookies, storage, history and permissions, running side by side.</p></article>
+        <article><h3>Hide my IP: Tor built in</h3><p>One click downloads Tor from torproject.org and routes every tab through it. New circuit on demand, status in the toolbar. Anonymous, free, volunteer-run; slower, and some sites block it.</p></article>
+        <article><h3>Free proxy pool</h3><p>Public proxy lists are fetched, health-checked and rotated automatically; the fastest ones win. Marked untrusted on purpose: strangers run them, so use it for casual browsing, never for logins. Or enter your own proxy.</p></article>
+        <article><h3>Move tabs around</h3><p>Drag tabs to reorder them, or pull one out of the strip to give it its own window. Every privacy level has a color, shown as a small badge on the tab.</p></article>
         <article><h3>Tabs that stay out of your way</h3><p>Pin tabs, color them into groups, and with ten or more tabs the strip turns into a vertical list. Hover a tab to see its RAM; a red dot marks heavy tabs and one click frees them.</p></article>
         <article><h3>Picks up where you left off</h3><p>Your last session comes back as sleeping placeholders. Only the tab you look at loads, so startup costs one page, not twenty.</p></article>
         <article><h3>Search your way</h3><p>Google, Bing, DuckDuckGo, Brave, Yandex, Ecosia or your own engine. Keywords jump straight to a site: <kbd>yt lofi</kbd>, <kbd>w rust</kbd>, <kbd>gh webview2</kbd>.</p></article>
         <article><h3>Find, download, permissions</h3><p>Find in page with a live match count, a download manager with pause and resume, and site permissions you decide once and can revoke in Settings.</p></article>
         <article><h3>Settings page and first-run wizard</h3><p>Every option on one page (<kbd>Ctrl</kbd>+<kbd>,</kbd>). A four-step welcome picks theme, a RAM limit sized to your PC, search engine and import.</p></article>
         <article><h3>Survives crashes</h3><p>A dead page shows a reload button instead of a blank tab, a hung one is marked, and if the engine itself dies the browser rebuilds it and reloads your tab.</p></article>
-        <article><h3>Auto-update</h3><p>New versions install silently from GitHub Releases after a SHA-256 check. See the <a href="/releases/">release history</a>.</p></article>
+        <article><h3>Auto-update, in the background</h3><p>Checked hourly. A new version downloads and verifies itself quietly and installs when you are idle or close the browser. See the <a href="/releases/">release history</a>.</p></article>
       </div>
     </section>
 
@@ -162,7 +165,8 @@
       <h2>Security and privacy</h2>
       <ul>
         <li><b>Tracker protection on every level.</b> Ad, analytics, social, crypto-mining and fingerprinting hosts are blocked from EasyList, EasyPrivacy, Fanboy's social, NoCoin and hosts lists refreshed daily. Third-party cookies never go to trackers, referrers are trimmed to the origin across sites, tracking parameters like <code>utm_</code>, <code>fbclid</code> and <code>gclid</code> are removed, and CNAME-cloaked trackers are caught through DNS over HTTPS.</li>
-        <li><b>Auto-update.</b> The browser checks GitHub Releases on startup and from its About page. Every update is verified with SHA-256 before it installs.</li>
+        <li><b>Auto-update.</b> The browser checks GitHub Releases on startup and every hour. A new version is downloaded and SHA-256-verified in the background, then installed when you are idle or when the browser closes.</li>
+        <li><b>Tor and proxies are optional and honest.</b> Tor comes straight from torproject.org (Expert Bundle, verified version from their own metadata) and runs only while the browser does. The free proxy pool is labelled untrusted everywhere it appears: proxy operators can see the sites you visit.</li>
         <li><b>End-to-end encryption.</b> Synced data uses AES-256-GCM under a key derived from your passphrase (PBKDF2-SHA256, 210k rounds). Forget the passphrase and it cannot be recovered. That is the point.</li>
         <li><b>Shared suggestions, no tracking.</b> The address bar's shared site pool stores only public site addresses and page titles with visit counts. No user ids, no query strings, no mail, banking, messaging or account pages. You can turn sharing off in settings.</li>
         <li><b>Linux.</b> The <code>.deb</code> and tarball need no signing. Install with <code>sudo apt install ./lightbrowser_*.deb</code>; the app checks GitHub for new versions and shows a notice.</li>
