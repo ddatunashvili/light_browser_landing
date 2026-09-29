@@ -1,40 +1,40 @@
 name: Release snapshot
 
-  # Mirrors the GitHub release list into releases.json, the fallback the site reads when the
-  # unauthenticated API (60 calls per hour per visitor IP) refuses. Download counts alone
-  # changing does not cause a commit.
-  on:
-    schedule:
-      - cron: '17 * * * *'
-    workflow_dispatch:
+# Mirrors the GitHub release list into releases.json, the fallback the site reads when the
+# unauthenticated API (60 calls per hour per visitor IP) refuses. Download counts alone
+# changing does not cause a commit.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
 
-  permissions:
-    contents: write
+permissions:
+  contents: write
 
-  jobs:
-    snapshot:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - name: Fetch releases
-          env:
-            GH_TOKEN: ${{ github.token }}
-          run: |
-            gh api 'repos/ddatunashvili/light_browser/releases?per_page=50' \
-              --jq '[.[] | select(.draft | not) | {tag_name, name, body, html_url, published_at, prerelease,
-                     assets: [.assets[] | {name, size, download_count, browser_download_url}]}]' > releases.json.new
-            test -s releases.json.new
-            jq -e 'length > 0' releases.json.new > /dev/null
-            strip='map(del(.assets[].download_count))'
-            if [ -f releases.json ] && [ "$(jq -c "$strip" releases.json)" = "$(jq -c "$strip" releases.json.new)" ]; then
-              echo "no new releases"; rm releases.json.new; exit 0
-            fi
-            mv releases.json.new releases.json
-        - name: Commit if changed
-          run: |
-            git diff --quiet -- releases.json && git ls-files --error-unmatch releases.json >/dev/null 2>&1 && exit 0
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add releases.json
-            git commit -m 'chore: update releases.json'
-            git push
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api 'repos/ddatunashvili/light_browser/releases?per_page=50' \
+            --jq '[.[] | select(.draft | not) | {tag_name, name, body, html_url, published_at, prerelease,
+                   assets: [.assets[] | {name, size, download_count, browser_download_url}]}]' > releases.json.new
+          test -s releases.json.new
+          jq -e 'length > 0' releases.json.new > /dev/null
+          strip='map(del(.assets[].download_count))'
+          if [ -f releases.json ] && [ "$(jq -c "$strip" releases.json)" = "$(jq -c "$strip" releases.json.new)" ]; then
+            echo "no new releases"; rm releases.json.new; exit 0
+          fi
+          mv releases.json.new releases.json
+      - name: Commit if changed
+        run: |
+          git diff --quiet -- releases.json && git ls-files --error-unmatch releases.json >/dev/null 2>&1 && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add releases.json
+          git commit -m 'chore: update releases.json'
+          git push
