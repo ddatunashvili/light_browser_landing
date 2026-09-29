@@ -89,20 +89,34 @@
     if ($('release-notes-link')) $('release-notes-link').hidden = false;   // points at /releases/
   }
 
+  function getJson(url, headers) {
+    return fetch(url, headers ? { headers: headers } : undefined)
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  }
+
   function load() {
     if (!$('version')) return;
+    var cached = null;
     try {
-      var cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if (cached && Date.now() - cached.t < CACHE_TTL) { apply(cached.rel); return; }
     } catch (e) {}
 
-    fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    // The API allows 60 calls an hour per IP; when it refuses, fall back to the site's own
+    // releases.json snapshot (refreshed hourly by a workflow), then to an expired cache.
+    getJson(API, { Accept: 'application/vnd.github+json' })
+      .catch(function () {
+        return getJson('/releases.json').then(function (list) {
+          return (list || []).filter(function (r) { return !r.prerelease; })[0];
+        });
+      })
       .then(function (rel) {
+        if (!rel || !rel.tag_name) throw new Error('no release');
         try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), rel: rel })); } catch (e) {}
         apply(rel);
       })
       .catch(function () {
+        if (cached && cached.rel) { apply(cached.rel); return; }
         // Leave the static "latest" links in place; they still resolve on GitHub.
         $('version').textContent = T.latest;
       });

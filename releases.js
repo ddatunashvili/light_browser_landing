@@ -113,20 +113,30 @@
     if (location.hash) { var el = document.getElementById(location.hash.slice(1)); if (el) el.scrollIntoView(); }
   }
 
+  function getJson(url, headers) {
+    return fetch(url, headers ? { headers: headers } : undefined)
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  }
+
   function load() {
     var root = document.getElementById('releases');
+    var c = null;
     try {
-      var c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
       if (c && Date.now() - c.t < CACHE_TTL) { render(c.list); return; }
     } catch (e) {}
-    fetch(API, { headers: { Accept: 'application/vnd.github+json' } })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    // API first (freshest); when it is rate limited, the site's releases.json snapshot,
+    // then an expired cache, and only then the error.
+    getJson(API, { Accept: 'application/vnd.github+json' })
+      .catch(function () { return getJson('/releases.json'); })
       .then(function (list) {
         list = (list || []).filter(function (r) { return !r.draft; });
+        if (!list.length) throw new Error('empty');
         try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), list: list })); } catch (e) {}
         render(list);
       })
       .catch(function () {
+        if (c && c.list && c.list.length) { render(c.list); return; }
         root.innerHTML = '<p class="muted">' + T.error + ' <a href="https://github.com/' + REPO + '/releases" target="_blank" rel="noopener">github.com/' + REPO + '/releases</a></p>';
       });
   }
